@@ -41,3 +41,7 @@
 /aspnet-core/GiftCard.BLL/obj
 /aspnet-core/WebAPI/bin/Debug/netcoreapp2.2
 /aspnet-core/WebAPI.ORM/bin/Debug/netcoreapp2.2
+/aspnet-core/GiftCard.Web/bin
+/aspnet-core/GiftCard.Web/obj/Release/netcoreapp2.2
+/aspnet-core/WebAPI.ORM/bin/Release/netcoreapp2.2
+/aspnet-core/WebAPI/bin/Release/netcoreapp2.2

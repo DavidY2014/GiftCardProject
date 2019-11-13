@@ -25,6 +25,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketCode.Helper", "Ticket
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiftCard.BLL", "GiftCard.BLL\GiftCard.BLL.csproj", "{510A251A-C3E0-4D33-96F0-0DBB48722AA1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiftCard.Web", "GiftCard.Web\GiftCard.Web.csproj", "{BB8FDE0C-FF77-4263-BA66-2FBB7EA604BB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +69,10 @@ Global
 		{510A251A-C3E0-4D33-96F0-0DBB48722AA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{510A251A-C3E0-4D33-96F0-0DBB48722AA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{510A251A-C3E0-4D33-96F0-0DBB48722AA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB8FDE0C-FF77-4263-BA66-2FBB7EA604BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB8FDE0C-FF77-4263-BA66-2FBB7EA604BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB8FDE0C-FF77-4263-BA66-2FBB7EA604BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB8FDE0C-FF77-4263-BA66-2FBB7EA604BB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,6 +86,7 @@ Global
 		{DDE6CE9D-5D01-455A-B24C-F138845AF07C} = {AFAA0841-BD93-466F-B8F4-FB4EEC86F1FC}
 		{27DF6E4D-D0F3-4D07-B514-A507EEF9CDE6} = {AFAA0841-BD93-466F-B8F4-FB4EEC86F1FC}
 		{510A251A-C3E0-4D33-96F0-0DBB48722AA1} = {AFAA0841-BD93-466F-B8F4-FB4EEC86F1FC}
+		{BB8FDE0C-FF77-4263-BA66-2FBB7EA604BB} = {AFAA0841-BD93-466F-B8F4-FB4EEC86F1FC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {19936941-7C76-4F20-9470-18022B140A14}

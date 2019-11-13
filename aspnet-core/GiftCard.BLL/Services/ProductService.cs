@@ -8,17 +8,16 @@ namespace GiftCard.BLL.Services
 {
     public class ProductService:IProductService
     {
-
-        private readonly GiftCardDBContext _context;
-
-        public ProductService(GiftCardDBContext context)
-        {
-            _context = context;
-        }
-
         public List<Tproduct> GetAllProducts()
         {
-            return _context.Tproduct.ToList();
+            using (var context = new GiftCardDBContext())
+            {
+                var efProducts = context.Tproduct;
+                if (efProducts.Count() == 0)
+                    return null;
+                return efProducts.ToList();
+            }
+
         }
     }
 }

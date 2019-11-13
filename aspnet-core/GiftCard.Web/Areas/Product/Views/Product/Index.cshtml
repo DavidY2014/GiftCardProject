@@ -37,7 +37,7 @@
 }
 
 @section Script{
-    <script src="~/Scripts/Product/ProductEdit.js"></script>
+    <script type="text/javascript" src="~/js/ProductEdit.js"></script>
     <script type="text/javascript">
         $(function () {
             //初始化网格
@@ -51,7 +51,7 @@
 
 
             $('#Create').click(function () {
-                productEdit.openInfoWindow();
+                productEdit.addTab("新增商品", "/Product/Product/Edit");
             });
 
 

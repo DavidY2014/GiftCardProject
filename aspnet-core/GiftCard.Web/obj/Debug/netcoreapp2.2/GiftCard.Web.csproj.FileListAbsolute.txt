@@ -29,3 +29,13 @@ D:\SVN\GiftCardProject\source\aspnet-core\GiftCard.Web\obj\Debug\netcoreapp2.2\G
 D:\SVN\GiftCardProject\source\aspnet-core\GiftCard.Web\obj\Debug\netcoreapp2.2\Razor\Areas\Product\Views\Product\Index.g.cshtml.cs
 D:\SVN\GiftCardProject\source\aspnet-core\GiftCard.Web\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_MasterDataList.g.cshtml.cs
 D:\SVN\GiftCardProject\source\aspnet-core\GiftCard.Web\obj\Debug\netcoreapp2.2\Razor\Views\_Layout.g.cshtml.cs
+D:\SVN\GiftCardProject\source\aspnet-core\GiftCard.Web\bin\Debug\netcoreapp2.2\GiftCard.BLL.dll
+D:\SVN\GiftCardProject\source\aspnet-core\GiftCard.Web\bin\Debug\netcoreapp2.2\TicketCode.Helper.dll
+D:\SVN\GiftCardProject\source\aspnet-core\GiftCard.Web\bin\Debug\netcoreapp2.2\WebAPI.ORM.dll
+D:\SVN\GiftCardProject\source\aspnet-core\GiftCard.Web\bin\Debug\netcoreapp2.2\GiftCard.BLL.pdb
+D:\SVN\GiftCardProject\source\aspnet-core\GiftCard.Web\bin\Debug\netcoreapp2.2\TicketCode.Helper.pdb
+D:\SVN\GiftCardProject\source\aspnet-core\GiftCard.Web\bin\Debug\netcoreapp2.2\WebAPI.ORM.pdb
+D:\SVN\GiftCardProject\source\aspnet-core\GiftCard.Web\obj\Debug\netcoreapp2.2\GiftCard.Web.csprojAssemblyReference.cache
+D:\SVN\GiftCardProject\source\aspnet-core\GiftCard.Web\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_MasterDateEdit.g.cshtml.cs
+D:\SVN\GiftCardProject\source\aspnet-core\GiftCard.Web\obj\Debug\netcoreapp2.2\Razor\Areas\Product\Views\Product\Edit.g.cshtml.cs
+D:\SVN\GiftCardProject\source\aspnet-core\GiftCard.Web\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_MasterLayout.g.cshtml.cs

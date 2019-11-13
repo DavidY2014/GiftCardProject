@@ -1,0 +1,26 @@
+﻿@{
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+<div style="height: 100%; position: relative;box-sizing:border-box;">
+    <div style="position: absolute; top: 10px; left: 15px; right: 15px; bottom: 40px;overflow-y:auto;">
+        <form id="EditForm" method="post">
+            @RenderSection("EditorArea")
+        </form>
+    </div>
+    <div style="height: 35px; position: absolute; left: 15px; right: 15px; bottom: 0;">
+        <div style="float:right">
+            <span style="margin-right:12px">
+                @if (IsSectionDefined("EditorCustom"))
+                {
+                    @RenderSection("EditorCustom");
+                }
+            </span>
+            <span>
+                <a id="Submit" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-save'">保存</a>
+                <a id="Close" class="easyui-linkbutton c3" data-options="plain:true">取消</a>
+            </span>
+        </div>
+    </div>
+</div>
+@RenderSection("Script", false)
+

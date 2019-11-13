@@ -12,8 +12,8 @@ namespace GiftCard.Web.Areas.Product.Controllers
     [Area("Product")]
     public class ProductController : Controller
     {
-        private ProductService _productService;
-        public ProductController(ProductService productService)
+        private readonly IProductService _productService;
+        public ProductController(IProductService productService)
         {
             _productService = productService;
         }
@@ -37,12 +37,19 @@ namespace GiftCard.Web.Areas.Product.Controllers
             return View();
         }
 
-
+        /// <summary>
+        /// 商品列表
+        /// </summary>
+        /// <returns></returns>
 
         public ActionResult QueryList()
         {
             var ret = new List<ProductModel>();
             var efProducts = _productService.GetAllProducts();
+            if (efProducts == null)
+            {
+                return Json(ret);
+            }
             foreach (var item in efProducts)
             {
                 ret.Add(new ProductModel {
@@ -51,6 +58,17 @@ namespace GiftCard.Web.Areas.Product.Controllers
                 });
             }
             return Json(ret);
+        }
+
+        /// <summary>
+        /// 保存
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult SaveProductInfo()
+        {
+
+
+            return Json(new { });
         }
 
 

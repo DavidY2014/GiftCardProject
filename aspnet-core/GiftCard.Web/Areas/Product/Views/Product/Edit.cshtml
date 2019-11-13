@@ -1,0 +1,129 @@
+﻿
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_MasterDateEdit.cshtml";
+}
+
+@section EditorArea{
+<table class="grid grid-cols6-width">
+    <tr>
+        <td>
+            <label>商品名称</label>
+        </td>
+        <td>
+            <input type="text" id="CustomerCode" name="Name" class="text-default easyui-textbox" required />
+        </td>
+        <td>
+            <label for="">商品标题 &nbsp;</label>
+        </td>
+        <td>
+            <input type="text" id="CustomerCode" name="Title" class="text-default easyui-textbox" required />
+        </td>
+        <td>
+            <label>一级类目</label>
+        </td>
+        <td>
+            <input type="text" id="CustomerCode" name="Class1" class="text-default easyui-textbox" required />
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <label>二级类目</label>
+        </td>
+        <td>
+            <input type="text" id="CustomerCode" name="Class2" class="text-default easyui-textbox" required />
+        </td>
+        <td>
+            <label for="">配送区域 &nbsp;</label>
+        </td>
+        <td>
+            <input type="text" id="CustomerCode" name="DeliveryArea" class="text-default easyui-textbox" required />
+        </td>
+        <td>
+            <label>所属供应商</label>
+        </td>
+        <td>
+            <input type="text" id="CustomerCode" name="BelongSupplier" class="text-default easyui-textbox" required />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>成本价</label>
+        </td>
+        <td>
+            <input type="text" id="CustomerCode" name="Cost" class="text-default easyui-textbox" required />
+        </td>
+        <td>
+            <label for="">销售价 &nbsp;</label>
+        </td>
+        <td>
+            <input type="text" id="CustomerCode" name="Price" class="text-default easyui-textbox" required />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>当前可用库存</label>
+        </td>
+        <td>
+            <input type="text" id="CustomerCode" name="AvaliableStock" class="text-default easyui-textbox" required />
+        </td>
+        <td>
+            <label for="">当前总销量 &nbsp;</label>
+        </td>
+        <td>
+            <input type="text" id="CustomerCode" name="SaleAmount" class="text-default easyui-textbox" required />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>商品图片</label>
+        </td>
+        <td>
+            <input class="easyui-filebox"  labelPosition="top" data-options="prompt:'Choose a file...'" style="width:100%">
+            <input class="easyui-filebox"  labelPosition="top" data-options="prompt:'Choose a file...'" style="width:100%">
+            <input class="easyui-filebox"  labelPosition="top" data-options="prompt:'Choose a file...'" style="width:100%">
+            <input class="easyui-filebox"  labelPosition="top" data-options="prompt:'Choose a file...'" style="width:100%">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>商品详情</label>
+        </td>
+        <td>
+            <input type="text" id="CustomerCode" name="ProductDetail" class="text-default easyui-textbox" required />
+        </td>
+    </tr>
+</table>
+
+    <span>
+        <input type="hidden" id="EditId" name="ClassId"  />
+        <input type="hidden" name="ParentClassId" />
+        <input type="hidden" name="ClassLevel"  />
+        <input type="hidden" name="ShowOrder"/>
+        <input type="hidden" name="WorkOrderTypeId" />
+    </span>
+}
+
+
+@section Script{
+
+    <script type="text/javascript">
+        $(function () {
+
+            $('#EditForm').form('submit', {
+                url:'',
+                onSubmit: function () {
+      
+                },
+                success: function (data) {
+                    alert(data)
+                }
+            });
+
+
+
+        })
+    </script>
+}
+

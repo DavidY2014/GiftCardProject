@@ -9,18 +9,21 @@
         <script src="~/Scripts/jquery-easyui-1.7.0/jquery.min.js"></script>
         <script src="~/Scripts/jquery-easyui-1.7.0/locale/easyui-lang-zh_CN.js"></script>*@
 
-    <link rel="stylesheet" type="text/css" href="http://www.w3cschool.cc/try/jeasyui/themes/default/easyui.css">
-    <link rel="stylesheet" type="text/css" href="http://www.w3cschool.cc/try/jeasyui/themes/icon.css">
-    <link rel="stylesheet" type="text/css" href="http://www.w3cschool.cc/try/jeasyui/demo/demo.css">
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.min.js"></script>
-    <script type="text/javascript" src="http://www.w3cschool.cc/try/jeasyui/jquery.easyui.min.js"></script>
-    
-    
+    <link rel="stylesheet" type="text/css" href="~/lib/jquery-easyui-1.7.0/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="~/lib/jquery-easyui-1.7.0/themes/icon.css">
+    <script type="text/javascript" src="~/lib/jquery-easyui-1.7.0/jquery.min.js"></script>
+    <script type="text/javascript" src="~/lib/jquery-easyui-1.7.0/jquery.easyui.min.js"></script>
+
+
     @RenderSection("Header", false)
     @RenderSection("Script", false)
 </head>
 <body>
-    @RenderBody()
+    <div class="easyui-tabs" id="tabs">
+        <div title="商品" style="padding:10px;">
+            @RenderBody()
+        </div>
+    </div>
 </body>
 </html>
 <iframe id="topLayout_rawframe" style="display:none;" name="topLayout_rawframe"></iframe>

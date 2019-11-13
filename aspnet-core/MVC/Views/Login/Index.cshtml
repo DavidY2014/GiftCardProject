@@ -1,0 +1,115 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="http://www.w3cschool.cc/try/jeasyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="http://www.w3cschool.cc/try/jeasyui/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="http://www.w3cschool.cc/try/jeasyui/demo/demo.css">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.min.js"></script>
+    <script type="text/javascript" src="http://www.w3cschool.cc/try/jeasyui/jquery.easyui.min.js"></script>
+</head>
+<body>
+    <h2>登录界面</h2>
+    <div style="margin:20px 0;"></div>
+    <div class="easyui-panel" title="注册" style="width:600%;max-width:800px;padding:30px 60px;">
+        <form id="fm" method="post">
+            <div style="margin-bottom:20px">
+                <label for="username" class="label-top">User Name:</label>
+                <input name="username" class="easyui-validatebox tb" data-options="required:true,validType:'length[3,10]',validateOnCreate:true,err:err">
+            </div>
+            <div style="margin-bottom:20px">
+                <label for="password" class="label-top">Password:</label>
+                <input name="password" class="easyui-validatebox tb" data-options="required:true,validType:'length[3,10]',validateOnCreate:true,err:err">
+            </div>
+            <div style="margin-bottom:20px">
+                <label for="phone" class="label-top">Phone:</label>
+                <input name="phone" class="easyui-validatebox tb" data-options="required:true,validateOnCreate:false,err:err">
+            </div>
+        </form>
+    </div>
+    <div>
+        <div id="dlg-buttons">
+            <a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="Login()">登录</a>
+        </div>
+        <div id="dlg-buttons">
+            <a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="Register()">注册</a>
+        </div>
+    </div>
+
+    <style scoped="scoped">
+        .tb {
+            width: 100%;
+            margin: 0;
+            padding: 5px 4px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        .error-message {
+            margin: 4px 0 0 0;
+            padding: 0;
+            color: red;
+        }
+    </style>
+    <script type="text/javascript">
+
+        function Login() {
+            $('#fm').form('submit', {
+                url: "/Login/LoginRequest",
+                onSubmit: function () {
+                    return $(this).form('validate');
+                },
+                success: function (result) {
+                    var result = eval('(' + result + ')');
+                    if (result.success) {
+                        window.location.href = '@Url.Action("Index", "ProductInfos")';    
+                    } else {
+                        $.messager.show({
+                            title: 'Error',
+                            msg: result.msg
+                        });
+                    }
+                }
+            });
+        }
+
+        function Register() {
+            $('#fm').form('submit', {
+                url: "/Login/Register",
+                onSubmit: function () {
+                    return $(this).form('validate');
+                },
+                success: function (result) {
+                    var result = eval('(' + result + ')');
+                    if (result.success) {
+                        $.messager.alert('Info', result.msg, 'info');
+                    } else {
+                        $.messager.show({
+                            title: 'Error',
+                            msg: result.msg
+                        });
+                    }
+                }
+            });
+        }
+
+        function err(target, message) {
+            var t = $(target);
+            if (t.hasClass('textbox-text')) {
+                t = t.parent();
+            }
+            var m = t.next('.error-message');
+            if (!m.length) {
+                m = $('<div class="error-message"></div>').insertAfter(t);
+            }
+            m.html(message);
+        }
+    </script>
+</body>
+</html>

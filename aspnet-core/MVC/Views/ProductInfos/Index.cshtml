@@ -1,0 +1,265 @@
+﻿@{
+    Layout = "~/Views/Shared/Layouts/_MasterDataList.cshtml";
+}
+@section ToolMenuBar{
+    <a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="refresh()">刷新</a>
+    <a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newProduct()">新增</a>
+    <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="exportExcel()">导出</a>
+    <a href="#" class="easyui-linkbutton" plain="true" onclick="doSearch()">查询</a>
+}
+@section SearchCondition {
+    <div id="tb" style="padding:3px">
+        <table class="grid">
+            <colgroup>
+                <col width="10%" />
+                <col width="23%" />
+                <col width="10%" />
+            </colgroup>
+            <tbody>
+                <tr>
+                    <td width="10%">
+                        <label>商品名称&nbsp;</label>
+                    </td>
+                    <td align="left">
+                        <input id="productname" style="line-height:26px;border:1px solid #ccc">
+                    </td>
+                    <td width="10%">
+                        <label>商品ID&nbsp;</label>
+                    </td>
+                    <td align="left">
+                        <input id="productid" style="line-height:26px;border:1px solid #ccc">
+                    </td>
+                    <td width="10%">
+                        <label>所属供应商&nbsp;</label>
+                    </td>
+                    <td align="left">
+                        <input id="supplier" style="line-height:26px;border:1px solid #ccc">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>商品状态&nbsp;</label>
+                    </td>
+                    <td align="left">
+                        <input id="status" style="line-height:26px;border:1px solid #ccc">
+                    </td>
+                    <td>
+                        <label>一级类目&nbsp;</label>
+                    </td>
+                    <td align="left">
+                        <input id="firstclass" style="line-height:26px;border:1px solid #ccc">
+                    </td>
+                    <td>
+                        <label>二级类目&nbsp;</label>
+                    </td>
+                    <td align="left">
+                        <input id="secondclass" style="line-height:26px;border:1px solid #ccc">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+}
+@section GridColumn {
+    <table id="dg" title="商品列表页" class="easyui-datagrid" style="width:1250px;height:250px"
+           url="/ProductInfos/QueryProductList"
+           pagination="true"
+           rownumbers="true" fitColumns="true" singleSelect="true">
+        <thead>
+            <tr>
+                <th field="productname" width="100">商品名称</th>
+                <th field="title" width="100">标题</th>
+                <th field="productid" width="100">商品ID</th>
+                <th field="supplier" width="100">所属供应商</th>
+                <th field="firstclass" width="100">一级类目</th>
+                <th field="secondclass" width="100">二级类目</th>
+                <th field="price" width="100">销售价/元</th>
+                <th field="totalremain" width="50">总库存</th>
+                <th field="totalsaled" width="100">当前总销量</th>
+                <th field="currentremain" width="100">当前可用库存</th>
+                <th field="status" width="150">商品状态</th>
+                <th field="operation" width="100">操作</th>
+                <th field="productstatus" hidden="hidden">状态</th>
+            </tr>
+        </thead>
+    </table>
+
+}
+@section Script {
+    <script type="text/javascript">
+        var url;
+        /*渲染每行操作按钮*/
+        function refresh() {
+            $('#dg').datagrid().refresh();
+        }
+
+
+        function newProduct() {
+            //跳转到新增界面
+            window.open("/ProductInfos/CreateNewPage")
+        }
+        function editProduct() {
+            var row = $('#dg').datagrid('getSelected');
+            if (row) {
+                window.open("/ProductInfos/CreateNewPage?productid=" + row.productid)
+            }
+        }
+
+
+        function checkProduct(target) {
+            var row = getRowIndex(target);
+            if (row >= 0) {
+                $('#dlg').dialog('open').dialog('setTitle', '查看商品');
+                $('#fm').form('load', row);
+                url = '/ProductInfos/EditProduct?id=' + row.id;
+            }
+        }
+        function switchProductStatus() {
+            var selectItem = $('#dg').datagrid('getSelected');
+            if (selectItem) {
+                $.post('/ProductInfos/SwitchProductStatus', { productid: selectItem.productid }, function (result) {
+                    if (result.success) {
+                        $('#dg').datagrid('reload');	// reload the user data
+                    } else {
+                        $.messager.show({	// show error message
+                            title: 'Error',
+                            msg: result.msg
+                        });
+                    }
+                }, 'json');
+            }
+        }
+        function saveProduct() {
+            $('#fm').form('submit', {
+                url: url,
+                onSubmit: function () {
+                    return $(this).form('validate');
+                },
+                success: function (result) {
+                    var result = eval('(' + result + ')');
+                    if (result.success) {
+                        $('#dlg').dialog('close');		// close the dialog
+                        $('#dg').datagrid('reload');	// reload the user data
+                    } else {
+                        $.messager.show({
+                            title: 'Error',
+                            msg: result.msg
+                        });
+                    }
+                }
+            });
+        }
+        function removeProduct(target) {
+            var selectItem = $('#dg').datagrid('getSelected');
+            if (selectItem) {
+                $.messager.confirm('Confirm', '你确定要移除此商品吗?', function (r) {
+                    if (r) {
+                        $.post('/ProductInfos/DeleteProduct', { productid: selectItem.productid}, function (result) {
+                            if (result.success) {
+                                $('#dg').datagrid('reload');	// reload the user data
+                            } else {
+                                $.messager.show({	// show error message
+                                    title: 'Error',
+                                    msg: result.message
+                                });
+                            }
+                        }, 'json');
+                    }
+                });
+            }
+        }
+
+        function exportExcel() {
+
+        }
+
+        function doSearch() {
+            $('#dg').datagrid('load', {
+                productname: $('#productname').val(),
+                productid: $('#productid').val(),
+                supplier: $('#supplier').combobox('getValue'),
+                status: $('#status').combobox('getValue'),
+                firstclass: $('#firstclass').val(),
+                secondclass: $('#secondclass').val()
+            });
+        }
+
+        $('#supplier').combobox({
+            url: '/ProductInfos/GetSupplier',
+            valueField: 'id',
+            textField: 'name'
+        });
+
+
+        $('#status').combobox({
+            url: '/ProductInfos/GetProductStatus',
+            valueField: 'status',
+            textField: 'name'
+        });
+
+        $('#firstclass').combobox({
+            url: '/ProductInfos/GetFirstClass',
+            valueField: 'id',
+            textField: 'name'
+        });
+
+        $('#secondclass').combobox({
+            url: '/ProductInfos/GetSecondClass',
+            valueField: 'id',
+            textField: 'name'
+        });
+
+        $('#newsupplier').combobox({
+            url: '/ProductInfos/GetSupplier',
+            valueField: 'id',
+            textField: 'name'
+        });
+
+        $('#newsendarea').combobox({
+            url: '/ProductInfos/GetSendArea',
+            valueField: 'id',
+            textField: 'name'
+        });
+
+        $('#newfirstclass').combobox({
+            url: '/ProductInfos/GetFirstClass',
+            valueField: 'id',
+            textField: 'name'
+        });
+
+        $('#newsecondclass').combobox({
+            url: '/ProductInfos/GetSecondClass',
+            valueField: 'id',
+            textField: 'name'
+        });
+
+    </script>
+}
+
+@section Style {
+    <style type="text/css">
+        #fm {
+            margin: 0;
+            padding: 10px 30px;
+        }
+
+        .ftitle {
+            font-size: 14px;
+            font-weight: bold;
+            color: #666;
+            padding: 5px 0;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .fitem {
+            margin-bottom: 5px;
+        }
+
+            .fitem label {
+                display: inline-block;
+                width: 80px;
+            }
+    </style>
+}
+

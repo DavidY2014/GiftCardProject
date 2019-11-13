@@ -1,0 +1,222 @@
+﻿
+@{
+    ViewData["Title"] = "订单管理";
+    Layout = "~/Views/Shared/Layouts/_MasterDataList.cshtml";
+}
+
+@section ToolMenuBar{
+    <a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="refresh()">刷新</a>
+    <a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="exportExcel()">导出订单</a>
+    <a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="import()">导入物流订单</a>
+    <a href="#" class="easyui-linkbutton" plain="true" onclick="doSearch()">查询</a>
+}
+
+@section SearchCondition {
+    <div id="tb" style="padding:3px">
+        <table class="grid">
+            <tbody>
+                <tr>
+                    <td width="10%">
+                        <label>订单编号&nbsp;</label>
+                    </td>
+                    <td align="left">
+                        <input id="orderid" style="line-height:26px;border:1px solid #ccc">
+                    </td>
+                    <td width="10%">
+                        <label>商品名称&nbsp;</label>
+                    </td>
+                    <td align="left">
+                        <input id="productname" style="line-height:26px;border:1px solid #ccc">
+                    </td>
+                    <td width="10%">
+                        <label>商品ID&nbsp;</label>
+                    </td>
+                    <td align="left">
+                        <input id="productid" style="line-height:26px;border:1px solid #ccc">
+                    </td>
+                    <td width="10%">
+                        <label>所属供应商&nbsp;</label>
+                    </td>
+                    <td align="left">
+                        <input id="suppliername" style="line-height:26px;border:1px solid #ccc">
+                    </td>
+                </tr>
+                <tr>
+                    <td width="10%">
+                        <label>联系方式&nbsp;</label>
+                    </td>
+                    <td align="left">
+                        <input id="contact" style="line-height:26px;border:1px solid #ccc">
+                    </td>
+                    <td width="10%">
+                        <label>所用劵号&nbsp;</label>
+                    </td>
+                    <td align="left">
+                        <input id="ticketnumber" style="line-height:26px;border:1px solid #ccc">
+                    </td>
+                    <td width="10%">
+                        <label>批次号&nbsp;</label>
+                    </td>
+                    <td align="left">
+                        <input id="batchnumber" style="line-height:26px;border:1px solid #ccc">
+                    </td>
+                    <td width="10%">
+                        <label>订单时间&nbsp;</label>
+                    </td>
+                    <td align="left">
+                        <input id="createtime" style="line-height:26px;border:1px solid #ccc">
+                    </td>
+                </tr>
+                <tr>
+                    <td width="10%">
+                        <label>物流单号&nbsp;</label>
+                    </td>
+                    <td align="left">
+                        <input id="logisticsnumber" style="line-height:26px;border:1px solid #ccc">
+                    </td>
+                    <td width="10%">
+                        <label>订单状态&nbsp;</label>
+                    </td>
+                    <td align="left">
+                        <input id="orderstatus" style="line-height:26px;border:1px solid #ccc">
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+}
+
+@section GridColumn {
+    <table id="dg" title="订单列表页" class="easyui-datagrid" style="width:1250px;height:500px"
+           url="/OrderInfo/QueryOrderList"
+           pagination="true"
+           rownumbers="true" fitColumns="true" singleSelect="true">
+        <thead>
+            <tr>
+                <th field="orderid" width="100">订单编号</th>
+                <th field="productname" width="100">商品名称</th>
+                <th field="productid" width="100">商品ID</th>
+                <th field="supplier" width="100">所属供应商</th>
+                <th field="buycount" width="100">购买数量</th>
+                <th field="ticketnumber" width="100">所用劵号</th>
+                <th field="batchnumber" width="100">所属批次号</th>
+                <th field="createtime" width="100">订单时间</th>
+                <th field="orderstatusDisplay" width="100">订单状态</th>
+                <th field="contact" width="100">联系方式</th>
+                <th field="receiver" width="100">收货人</th>
+                <th field="receiveraddress" width="100">收货地址</th>
+                <th field="logisticsnumber" width="100">物流单号</th>
+            </tr>
+        </thead>
+    </table>
+
+
+}
+
+@section Script {
+    <script type="text/javascript">
+        var url;
+        /*渲染每行操作按钮*/
+        function getRowIndex(target) {
+            var tr = $(target).closest('tr.datagrid-row');
+            return parseInt(tr.attr('datagrid-row-index'));
+        }
+        function refresh() {
+            $('#dg').datagrid().refresh();
+        }
+
+        function newSupplier() {
+            //跳转到新增界面
+            window.open("/Supplier/CreateNewSupplier")
+        }
+        function editSupplier() {
+            var row = $('#dg').datagrid('getSelected');
+            if (row) {
+                window.open("/Supplier/CreateNewSupplier?id=" + row.supplierid)
+
+
+            }
+        }
+
+
+        function removeSupplier() {
+            var selectItem = $('#dg').datagrid('getSelected');
+            if (selectItem) {
+                $.messager.confirm('Confirm', '你确定要移除此供应商吗?', function (r) {
+                    if (r) {
+                        $.post('/Supplier/RemoveSupplier', { supplierid: selectItem.supplierid }, function (result) {
+                            if (result.success) {
+                                $('#dg').datagrid('reload');	// reload the user data
+                            } else {
+                                $.messager.show({	// show error message
+                                    title: 'Error',
+                                    msg: result.msg
+                                });
+                            }
+                        }, 'json');
+                    }
+                });
+            }
+        }
+
+        function doSearch() {
+            $('#dg').datagrid('load', {
+                orderid: $('#orderid').val(),
+                productname: $('#productname').val(),
+                productid: $('#productid').val(),
+                supplierid: $('#supplierid').combobox('getValue'),
+                contact: $('#contact').val(),
+                ticketnumber: $('#ticketnumber').val(),
+                batchnumber: $('#batchnumber').val(),
+                createtime: $('#createtime').val(),
+                logisticsnumber: $('#logisticsnumber').val(),
+                orderstatus: $('#orderstatus').combobox('getValue'),
+            });
+        }
+
+        $('#supplierid').combobox({
+            url: '/OrderInfo/GetSupplierName',
+            valueField: 'id',
+            textField: 'name'
+        });
+
+        $('#orderstatus').combobox({
+            url: '/OrderInfo/GetOrderStatus',
+            valueField: 'id',
+            textField: 'name'
+        });
+
+
+    </script>
+}
+
+@section Style {
+    <style type="text/css">
+        #fm {
+            margin: 0;
+            padding: 10px 30px;
+        }
+
+        .ftitle {
+            font-size: 14px;
+            font-weight: bold;
+            color: #666;
+            padding: 5px 0;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .fitem {
+            margin-bottom: 5px;
+        }
+
+            .fitem label {
+                display: inline-block;
+                width: 80px;
+            }
+    </style>
+}
+
+
+

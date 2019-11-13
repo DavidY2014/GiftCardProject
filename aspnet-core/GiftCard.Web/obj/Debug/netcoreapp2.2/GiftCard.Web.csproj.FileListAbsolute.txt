@@ -27,6 +27,5 @@ D:\SVN\GiftCardProject\source\aspnet-core\GiftCard.Web\obj\Debug\netcoreapp2.2\G
 D:\SVN\GiftCardProject\source\aspnet-core\GiftCard.Web\obj\Debug\netcoreapp2.2\GiftCard.Web.pdb
 D:\SVN\GiftCardProject\source\aspnet-core\GiftCard.Web\obj\Debug\netcoreapp2.2\GiftCard.Web.csproj.CopyComplete
 D:\SVN\GiftCardProject\source\aspnet-core\GiftCard.Web\obj\Debug\netcoreapp2.2\Razor\Areas\Product\Views\Product\Index.g.cshtml.cs
-D:\SVN\GiftCardProject\source\aspnet-core\GiftCard.Web\obj\Debug\netcoreapp2.2\GiftCard.Web.csprojAssemblyReference.cache
 D:\SVN\GiftCardProject\source\aspnet-core\GiftCard.Web\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_MasterDataList.g.cshtml.cs
 D:\SVN\GiftCardProject\source\aspnet-core\GiftCard.Web\obj\Debug\netcoreapp2.2\Razor\Views\_Layout.g.cshtml.cs

@@ -5,11 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
+    <PackageReference Include="Dapper" Version="2.0.30" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Dapper" Version="2.0.30" />
+    <ProjectReference Include="..\TicketCode.Helper\TicketCode.Helper.csproj" />
+    <ProjectReference Include="..\WebAPI.ORM\WebAPI.ORM.csproj" />
   </ItemGroup>
 
 </Project>

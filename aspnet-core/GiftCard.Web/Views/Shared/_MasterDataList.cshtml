@@ -1,29 +1,31 @@
 ﻿
 @{
     Layout = "~/Views/_Layout.cshtml";
+    var enableSearchPanel = ViewBag.HideSearchPanel == null || !ViewBag.HideSearchPanel;
 }
 
 @section Header
-{
+    {
 }
 @section Script
-{
+    {
 
 }
 
 <div style="height:100%;">
-
-    <!--导航栏 NavBar-->
-    <div style="width:100%;" class="navbar">
-        <div class="navbar-backmenu-url">
-            @*<a href="javascript:;" title="返回上级菜单" onclick="ColipuPageBase.prototype.showConfirm('即将返回主页，确定离开？',function(){window.location='@ViewBag.backMenuUrl'})"><span>@ViewBag.backMenu</span></a>*@
+    @if (!string.IsNullOrWhiteSpace(ViewBag.backMenu) && !string.IsNullOrWhiteSpace(ViewBag.backMenuUrl))
+    {
+        <!--导航栏 NavBar-->
+        <div style="width:100%;" class="navbar">
+            <div class="navbar-backmenu-url">
+                <a href="javascript:;" title="返回上级菜单" onclick="ColipuPageBase.prototype.showConfirm('即将返回主页，确定离开？',function(){window.location='@ViewBag.backMenuUrl'})"><span>@ViewBag.backMenu</span></a>
+            </div>
+            <div class="navbar-menu">
+                <span> > </span>
+                <span class="navbar-menu-title"> @ViewBag.Title</span>
+            </div>
         </div>
-        <div class="navbar-menu">
-            <span> > </span>
-            @*<span class="navbar-menu-title"> @ViewBag.Title</span>*@
-        </div>
-    </div>
-
+    }
     <!--可视窗口Portlet Search Panel-->
     <div class="portlet" style="width: 100%;">
         <div class="portlet-header">
@@ -34,26 +36,30 @@
                     @RenderSection("ToolMenuBar");
                 }
             </span>
-
-            <span class="portlet-tools-right">
-                <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-down',plain:true" id="DropdownPanel">显示</a>
-            </span>
+            @if (enableSearchPanel)
+            {
+                <span class="portlet-tools-right">
+                    <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-down',plain:true" id="DropdownPanel">显示</a>
+                </span>
+            }
         </div>
-        <div class="portlet-content" style="display:none;">
-            <div id="SearchDialog" class="jumbotron">
-                <form id="SearchConditionForm">
-                    @RenderSection("SearchCondition")
-                </form>
-                <div class="s_btn_searchbox">
-                    <span style="float:right;">
-                        <a id="QueryConditionSearch" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-search'">搜索</a>
-                        <span class="col-xs-8"></span>
-                        <a id="QueryConditionReset" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-undo'">重置</a>
-                        <span class="col-xs-8"></span>
-                    </span>
+        @if (enableSearchPanel)
+        {
+            <div class="portlet-content" style="display:none;">
+                <div id="SearchDialog" class="jumbotron">
+                    <form id="SearchConditionForm">
+                        @RenderSection("SearchCondition")
+                    </form>
+                    <div class="s_btn_searchbox">
+                        <span style="float:right;">
+                            <a id="QueryConditionSearch" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-search'">搜索</a>
+                            <span class="col-xs-8"></span>
+                            <a id="QueryConditionReset" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-undo'">重置</a>
+                            <span class="col-xs-8"></span>
+                        </span>
+                    </div>
                 </div>
-            </div>
-        </div>
+            </div>}
     </div>
     <!--可视窗口Portlet DataList Panel-->
     <div class="portlet" style="width: 100%; ">
@@ -70,6 +76,7 @@
         </div>
     </div>
 </div>
+
 @RenderSection("Style", false)
 @RenderSection("Script", false)
 

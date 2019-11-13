@@ -4,9 +4,6 @@
 
 @section ToolMenuBar{
     <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" id="Create">新增</a>
-    <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-export',plain:true" id="RepairContactExport">
-        订单导出
-    </a>
 }
 
 @section SearchCondition{
@@ -32,72 +29,38 @@
                     <input type="text" name="CustomerName" id="CustomerName" data-ctlname="CustomerName" class="easyui-textbox" />
                 </td>
             </tr>
-            <tr>
-                <td>
-                    <label>合同起始时间&nbsp;</label>
-                </td>
-                <td align="left">
-                    <input type="text" name="StartDate" id="ContractTimeStartQuery" data-ctlname="StartDate" />
-                </td>
-                <td>
-                    <label>合同结束时间&nbsp;</label>
-                </td>
-                <td align="left">
-                    <input type="text" name="EndDate" id="ContractTimeEndQuery" data-ctlname="EndDate" />
-                </td>
-                <td>
-                    <label>状态&nbsp;</label>
-                </td>
-                <td align="left">
-                    <input type="text" id="StatusQuery" data-ctlname="Status" name="Status" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label>合同类型&nbsp;</label>
-                </td>
-                <td align="left">
-                    <input type="text" name="ContractType" id="ContractTypeQuery" data-ctlname="ContractType" class="easyui-textbox" />
-                </td>
-                <td>
-                    <label>服务周期&nbsp;</label>
-                </td>
-                <td align="left">
-                    <input type="text" name="ServicePeriod" id="ServicePeriodQuery" data-ctlname="ServicePeriod" class="easyui-textbox" />
-                </td>
-                <td>
-                    <label>核销状态&nbsp;</label>
-                </td>
-                <td>
-                    <input type="text" id="VerifyStatusQuery" data-ctlname="VerifyStatus" name="VerifyStatus" class="easyui-textbox" />
-                </td>
-            </tr>
         </tbody>
     </table>
 }
 
 @section GridColumn{
-    <tr>
-        <th data-options="field:'RepairContractId',width:80">合同编号</th>
-        <th data-options="field:'CustomerId',width:100">客户编码</th>
-        <th data-options="field:'CustomerName',width:120">客户名称</th>
-        <th data-options="field:'ContractTypeDisplayNote',width:80">合同类型</th>
-        <th data-options="field:'ServicePeriodDisplayNote',width:80">服务周期</th>
-        <th data-options="field:'ContractLifeDisplayNote',width:80">合同年限</th>
-        <th data-options="field:'ContractStatusDisplayNote',width:80">状态</th>
-        <th data-options="field:'VerifyStatusDisplayNote',width:80">核销状态</th>
-        <th data-options="field:'StartDate',width:80">合同起始时间</th>
-        <th data-options="field:'EndDate',width:80">合同结束时间</th>
-        <th data-options="field:'PendingDate',width:80">合同中止时间</th>
-        <th data-options="field:'AbandonDate',width:80">合同作废时间</th>
-        <th data-options="field:'Operation',width:80,formatter:repairContract.RowButton">操作</th>
-    </tr>
 }
 
 @section Script{
+    <script src="~/Scripts/Product/ProductEdit.js"></script>
     <script type="text/javascript">
+        $(function () {
+            //初始化网格
+            $('#GridList').datagrid({
+                url: '/Product/Product/QueryList',
+                columns: [[
+                    { field: 'name', title: 'Name', width: 100 },
+                    { field: 'code', title: 'Code', width: 100 },
+                ]]
+            });
 
 
+            $('#Create').click(function () {
+                productEdit.openInfoWindow();
+            });
+
+
+
+
+
+
+
+        });
 
     </script>
 }

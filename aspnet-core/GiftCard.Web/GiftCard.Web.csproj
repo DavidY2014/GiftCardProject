@@ -17,7 +17,11 @@
 
   <ItemGroup>
     <Folder Include="Areas\Product\Data\" />
-    <Folder Include="Areas\Product\Models\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\GiftCard.BLL\GiftCard.BLL.csproj" />
   </ItemGroup>
 
 </Project>

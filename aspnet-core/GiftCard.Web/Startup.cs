@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GiftCard.Web.Extension;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using WebAPI.ORM.GiftCardModels;
 
 namespace GiftCard.Web
 {
@@ -23,12 +26,21 @@ namespace GiftCard.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
+            services.AddDbContext<GiftCardDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("GiftCardDB")));
+
+            #region Service Register
+
+
+            services.AddByAssembly("GiftCard.BLL", "IProductService");
+            services.AddByAssembly("GiftCard.BLL", "ICatelogService");
+            services.AddByAssembly("GiftCard.BLL", "ISupplierService");
+            services.AddByAssembly("GiftCard.BLL", "IOrderService");
+            services.AddByAssembly("GiftCard.BLL", "ITicketService");
+            
+
+
+            #endregion
+
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);

@@ -39,6 +39,7 @@
     <Folder Include="Areas\Dongfuh5\Data\" />
     <Folder Include="Areas\Dongfuh5\Models\" />
     <Folder Include="Areas\Dongfuh5\Views\" />
+    <Folder Include="Controllers\" />
   </ItemGroup>
 
 </Project>

@@ -37,3 +37,7 @@
 /aspnet-core/TicketCode.Helper/obj
 /aspnet-core/WebAPI/obj
 /aspnet-core/WebAPI.ORM/obj
+/aspnet-core/GiftCard.BLL/bin/Debug/netcoreapp2.2
+/aspnet-core/GiftCard.BLL/obj
+/aspnet-core/WebAPI/bin/Debug/netcoreapp2.2
+/aspnet-core/WebAPI.ORM/bin/Debug/netcoreapp2.2

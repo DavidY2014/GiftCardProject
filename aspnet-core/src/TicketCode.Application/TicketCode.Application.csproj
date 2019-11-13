@@ -12,6 +12,5 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\WebAPI.ORM\WebAPI.ORM.csproj" />
-    <ProjectReference Include="..\TicketCode.Core\TicketCode.Core.csproj" />
   </ItemGroup>
 </Project>

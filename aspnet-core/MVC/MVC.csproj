@@ -14,13 +14,14 @@
 
 
   <ItemGroup>
+    <Folder Include="Controllers\" />
     <Folder Include="Scripts\" />
   </ItemGroup>
 
 
   <ItemGroup>
     <ProjectReference Include="..\Extension.Util\Extension.Util.csproj" />
-    <ProjectReference Include="..\TickCode.ORM\TickCode.ORM.csproj" />
+    <ProjectReference Include="..\GiftCard.BLL\GiftCard.BLL.csproj" />
   </ItemGroup>
 
 </Project>

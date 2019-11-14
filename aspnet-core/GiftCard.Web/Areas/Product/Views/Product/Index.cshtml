@@ -44,8 +44,18 @@
             $('#GridList').datagrid({
                 url: '/Product/Product/QueryList',
                 columns: [[
-                    { field: 'name', title: 'Name', width: 100 },
-                    { field: 'code', title: 'Code', width: 100 },
+                    { field: 'Name', title: '商品名称', width: 100 },
+                    { field: 'Title', title: '标题', width: 100 },
+                    { field: 'SupplierName', title: '商品ID', width: 100 },
+                    { field: 'DeliveryAddress', title: '所属供应商', width: 100 },
+                    { field: 'Class1', title: '一级类目', width: 100 },
+                    { field: 'Class2', title: '二级类目', width: 100 },
+                    { field: 'SalePrice', title: '销售价格', width: 100 },
+                    { field: 'TotalStock', title: '总库存', width: 100 },
+                    { field: 'SaleCount', title: '当前总销量', width: 100 },
+                    { field: 'AvaliableStock', title: '当前可用库存', width: 100 },
+                    { field: 'Status', title: '商品状态', width: 100 },
+                    { field: 'Operation', title: '操作', width: 100 },
                 ]]
             });
 

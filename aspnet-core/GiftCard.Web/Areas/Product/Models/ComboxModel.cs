@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace GiftCard.Web.Areas.Product.Models
 {
-    public class ProductModel
+    public class ComboxModel
     {
-        public string Name { get; set; }
-        public string Code { get; set; }
+        public string id { get; set;}
+        public string text { get; set; }
     }
 }

@@ -6,6 +6,7 @@ using GiftCard.BLL.Services;
 using GiftCard.Web.Areas.Product.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebAPI.ORM.GiftCardModels;
 
 namespace GiftCard.Web.Areas.Product.Controllers
 {
@@ -13,9 +14,11 @@ namespace GiftCard.Web.Areas.Product.Controllers
     public class ProductController : Controller
     {
         private readonly IProductService _productService;
-        public ProductController(IProductService productService)
+        private readonly ISupplierService _supplierService;
+        public ProductController(IProductService productService,ISupplierService supplierService)
         {
             _productService = productService;
+            _supplierService = supplierService;
         }
 
 
@@ -44,7 +47,7 @@ namespace GiftCard.Web.Areas.Product.Controllers
 
         public ActionResult QueryList()
         {
-            var ret = new List<ProductModel>();
+            var ret = new List<ProductDGModel>();
             var efProducts = _productService.GetAllProducts();
             if (efProducts == null)
             {
@@ -52,9 +55,19 @@ namespace GiftCard.Web.Areas.Product.Controllers
             }
             foreach (var item in efProducts)
             {
-                ret.Add(new ProductModel {
-                    Name=item.Name,
-                    Code = item.Code
+                ret.Add(new ProductDGModel
+                {
+                    Name = item.Name,
+                    //Title = item.title
+                    SupplierName = item.SupplierName,
+                    DeliveryAddress = item.DeliveryAddress,
+                    Class1 = item.Class1.ToString(),
+                    Class2 = item.Class2.ToString(),
+                    SalePrice = item.SalePrice.ToString(),
+                    TotalStock = item.TotalStock.ToString(),
+                    SaleCount = item.SaledStock.ToString(),
+                    //AvaliableStock = item
+                    Status = item.Status,
                 });
             }
             return Json(ret);
@@ -64,13 +77,25 @@ namespace GiftCard.Web.Areas.Product.Controllers
         /// 保存
         /// </summary>
         /// <returns></returns>
-        public ActionResult SaveProductInfo()
+        public ActionResult SaveProductInfo(SaveProductModel model)
         {
-
-
-            return Json(new { });
+            var efProduct = model.ConvertToEntity();
+            _productService.CreateNewProduct(efProduct);
+            return Json(new { IsSuccess=true,Data="Success"});
         }
 
+
+        #region 下拉列表
+
+        public ActionResult InitSupplierJson()
+        {
+            var distinctSuppliers = _supplierService.GetAllDistinctSuppliers();
+            var ret = distinctSuppliers.Select(item => new ComboxModel { id = item.Id.ToString(), text = item.Name }).Distinct().ToList();
+            return Json(ret);
+        }
+
+
+        #endregion
 
     }
 }

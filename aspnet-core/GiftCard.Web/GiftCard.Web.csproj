@@ -17,7 +17,12 @@
 
 
   <ItemGroup>
+    <Folder Include="Areas\Catelog\Controllers\" />
+    <Folder Include="Areas\Catelog\Data\" />
+    <Folder Include="Areas\Catelog\Models\" />
+    <Folder Include="Areas\Catelog\Views\" />
     <Folder Include="Areas\Product\Data\" />
+    <Folder Include="Areas\Supplier\Data\" />
     <Folder Include="Scripts\Product\" />
   </ItemGroup>
 

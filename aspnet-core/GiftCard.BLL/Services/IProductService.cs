@@ -7,6 +7,9 @@ namespace GiftCard.BLL.Services
 {
     public interface IProductService
     {
-         List<Tproduct> GetAllProducts();
+        List<Tproduct> GetAllProducts();
+        void CreateNewProduct(Tproduct efProduct);
+
+
     }
 }

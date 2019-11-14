@@ -19,5 +19,22 @@ namespace GiftCard.BLL.Services
             }
 
         }
+
+        public void CreateNewProduct(Tproduct efProduct)
+        {
+            try
+            {
+                using (var context = new GiftCardDBContext())
+                {
+                    context.Tproduct.Add(efProduct);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
     }
 }
